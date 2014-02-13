@@ -15,7 +15,6 @@ var app = app || {};
             var latlong = $.param(opts.coords); var totalDist = latlong+'%2C'+dist; experience.replace('','%20');
             this.url = rootDomain + '/api/experiences?category='+experience+'&' + totalDist + '&apiKey='+apiKey ;//pp1yvpos00okckkkko' ;
             this.nextUri = null;
-            console.log(this.url,experience);
             this.fetchPage();
         },
 
@@ -40,21 +39,18 @@ var app = app || {};
         },
 
         success : function(collection, response, options) {
-            console.log(response);
             if (this.nextUri) {
                 this.fetchPage();
             }
             else {  
                 var listOfAllExperiences = _.flatten(_.pluck(this.models,'attributes'));
-                if(response.data.length!==0)
-                {
+                if(response.data.length!==0) {
                     var listOfExperiences = _.first(listOfAllExperiences,listOfAllExperiences.length-1);
                     var experience = listOfExperiences[Math.floor(Math.random() * listOfExperiences.length)];
                     app.experienceModel.set({experience:''},{silent:true});
                     app.experienceModel.set('experience',experience); 
                 }
-                else
-                {
+                else {
                     this.initialize(this.coords,'100');
                 }
                

@@ -11,55 +11,7 @@ var app = app || {};
             "click #search-btn": "findCoordinates",
             "keypress #search-txt": "findCoordinates",
         },
-        // markerImg : {
-        //     'River Rafting' : 'waterpark',
-        //     'Trekking / Hiking' : 'hiking',
-        //     'Kayaking & Canoeing' : 'kayaking',
-        //     'Fly Fishing' : 'fishing',
-        //     'Food & Wine' : 'restaurant',
-        //     "Sailing" : 'sailing',
-        //     'Cycling & Mountain Biking' : 'cycling',
-        //     "Deep Sea Fishing": 'deepseafishing',
-        //     "Guide School": 'walkingtour',
-        //     "River Tubing ": '',
-        //     "Safety Training": '',
-        //     "Team Building": '',
-        //     "Bungee Jumping": '',
-        //     "Caving / Spelunking": 'spelunking',
-        //     "River Cruises": 'cruiseship',
-        //     "Skydiving": 'diving',
-        //     "Surfing": 'surfing',
-        //     "Website Creation": '',
-        //     "Lake Fishing": 'fishing',
-        //     "Parachuting": 'paragliding',
-        //     "Paragliding": 'paragliding',
-        //     "Mountaineering": 'mountains',
-        //     "Aerial Tours": 'helicopter',
-        //     "Creative Classes": '',
-        //     "Snowshoeing": 'snowshoeing',
-        //     "Windsurfing & Kitesurfing": 'kitesurfing',
-        //     "Art & Architecture": '',
-        //     "Birdwatching": 'birds-2',
-        //     "Hang Gliding ": 'hanggliding',
-        //     "Wilderness Training": '',
-        //     "Ballooning": 'hotairbaloon',
-        //     "Walking Tours": 'walkingtour',
-        //     "Backpacking/Camping": 'camping-2',
-        //     "Culture & History": '',
-        //     "Eco-Tour/Hike": '',
-        //     "Marine Wildlife": '',
-        //     "Snowmobiling": 'snowmobiling',
-        //     "Wakeboarding": 'boardercross',
-        //     "Zip-lining": 'ziplining',
-        //     "Beer Tour": 'beergarden',
-        //     "Photography": 'photography',
-        //     "Snowkiting": 'snowboarding',
-        //     "Stand Up Paddle (SUP)": 'surfpaddle',
-        //     "Off-road": 'atv',
-        //     "Helicopter Tours": 'helicopter',
-        //     "Horseback Riding": 'horseriding',
-        //     "Rock Climbing": 'climbing'
-        // },
+       
 
         initialize : function(opts) {
             this.markers = [];
@@ -68,60 +20,54 @@ var app = app || {};
         render : function() {
             var self = this;
             // Let's setup the map
-            // var styles = [{
-            //     elementType: "geometry",
-            //     stylers: [{ lightness: 23 }, { saturation: -10 }]
-            // }];
-
-
-        var styles = [
-              {
-                featureType: "all",
-                stylers: [
-                  { saturation: -80 }
-                ]
-              },{
-                featureType: "road.arterial",
-                elementType: "geometry",
-                stylers: [
-                  { hue: "#00ffee" },
-                  { saturation: 50 }
-                ]
-              },{
-                featureType: "poi.business",
-                elementType: "labels",
-                stylers: [
-                  { visibility: "off" }
-                ]
-             }
-        ];
+            
+            var styles = [
+                  {
+                    featureType: "all",
+                    stylers: [
+                      { saturation: -80 }
+                    ] },
+                  {
+                    featureType: "road.arterial",
+                    elementType: "geometry",
+                    stylers: [
+                      { hue: "#00ffee" },
+                      { saturation: 50 }
+                    ] },
+                  {
+                    featureType: "poi.business",
+                    elementType: "labels",
+                    stylers: [
+                      { visibility: "off" }
+                    ]
+                 }
+            ];
 
             // By default set fixed Geo-cordinates of Mountain View, CA
             // long, lat
             var defaultCoords = [37.413114,-122.070336];
             this.coords = { geo: defaultCoords.join(',') };
-            // if (navigator.geolocation) {
-            //     // We have the user's Geo Location - let's center the map around that area
-            //     navigator.geolocation.getCurrentPosition(
-            //         function(pos) {
-            //             self.coords = { geo: pos.coords.latitude + "," + pos.coords.longitude };
+            if (navigator.geolocation) {
+                // We have the user's Geo Location - let's center the map around that area
+                navigator.geolocation.getCurrentPosition(
+                    function(pos) {
+                        self.coords = { geo: pos.coords.latitude + "," + pos.coords.longitude };
                         
-            //             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + self.coords.geo + "&sensor=false";
-            //             $.getJSON(url, function(data) {
-            //                 if(data.status==='OK'){
+                        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + self.coords.geo + "&sensor=false";
+                        $.getJSON(url, function(data) {
+                            if(data.status==='OK'){
                                 
-            //                     self.currentAddress = data.results[0].formatted_address; console.log(self.currentAddress);
-            //                     $('#search-txt').val(self.currentAddress);
-            //                 }
-            //             });
-            //         },
-            //         function(e) {
-            //             console.warn(e);
-            //         }
-            //     );
-            // }
+                                self.currentAddress = data.results[0].formatted_address; console.log(self.currentAddress);
+                                $('#search-txt').val(self.currentAddress);
+                            }
+                        });
+                    },
+                    function(e) {
+                        console.warn(e);
+                    }
+                );
+            }
 
-           
             var geo = this.coords.geo.split(',');
             this.options = {
                 zoom: 6,
@@ -142,9 +88,8 @@ var app = app || {};
 
             this.collection = new app.ExperiencesCollection({coords : this.coords});
             app.experienceCollection = this.collection;
-            //Fire an event when we receive the first batch of data
+            //Fire an event when we set the model for selected data.
             this.listenTo(this.model,"change:experience",function(){
-                console.log(self.model.get('experience'));
                 self.trigger('load:first');
             });
         },
@@ -186,10 +131,10 @@ var app = app || {};
             var id = e.currentTarget.id;
            
             if(id==='later'){
-                //make API call with bigger distance
+                //make api call with bigger distance
                 app.experienceCollection.initialize({coords : this.coords},'500');       
             }else{
-                //make API call with smaller distance
+                //make api call with smaller distance
                 app.experienceCollection.initialize({coords : this.coords},'30');       
             }
         },
@@ -198,7 +143,6 @@ var app = app || {};
 
             this.oms = new OverlappingMarkerSpiderfier(this.map);
             var geo = this.coords.geo.split(',');
-            // this.map.panTo(new google.maps.LatLng(geo[0], geo[1]));
 
             // Put the selected experience on the map
                 var markerView = new app.MarkerView({map: self.map});
@@ -220,7 +164,6 @@ var app = app || {};
             });
 
             this.plotRoute();
-    
 
             this.oms.addListener('click', function(marker) {
                 self.showInfo.call(marker, self.$el);
@@ -240,9 +183,8 @@ var app = app || {};
             xola.init();
         },
 
-        plotRoute : function(){
+        plotRoute : function() {
             var self=this;
-            console.log(this);
             var geo = this.coords.geo.split(',');
             var exp = this.model.get('experience');    
             var latLong = [
@@ -255,8 +197,8 @@ var app = app || {};
             //Set the Path Stroke Color
             var poly = new google.maps.Polyline({ map: self.map, strokeColor: '#4444ee' });
             //Loop and Draw Path Route between the Points on MAP
-            for (var i = 0; i < latLong.length; i++) {
-                if ((i + 1) < latLong.length) {
+            for (var i = 0,l = latLong.length; i < l; i++) {
+                if ((i + 1) < l) {
                     var src = latLong[i];
                     var des = latLong[i + 1];
                     path.push(src);
@@ -274,6 +216,7 @@ var app = app || {};
                     });
                 }
             }
+            
         },
 
         hideInfo : function() {
