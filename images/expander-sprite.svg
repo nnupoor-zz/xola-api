@@ -1,0 +1,189 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="1536px" height="512px" viewBox="0 0 1536 512">
+  <title>Runway Widget Expander Sprite</title>
+  <defs>
+    <filter id="glow"
+            x="-128" y="-128" width="512" height="512">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="16"/>
+    </filter>
+    <polygon id="hide-shape"
+             points="128.9141,26.6128 48.8379,106.5767 71.2959,129.0547
+                     128.9141,71.5698 184.7656,127.4185 207.1621,104.9409"/>
+    <polygon id="show-shape"
+             points="128.9141,129.0547 48.8379,49.0918 71.2959,26.6133
+                     128.9141,84.0977 184.7656,28.248 207.1621,50.7266"/>
+  </defs>
+  <style>
+    .carto.default .primary {
+      fill: #666;
+    }
+    .carto.hover .glow {
+      fill: #333;
+      fill-opacity: 0.3;
+    }
+    .carto.hover .primary {
+      fill: #333;
+    }
+    .carto.active .glow {
+      fill: #000;
+      fill-opacity: 0.3;
+    }
+    .carto.active .primary {
+      fill: #000;
+    }
+
+    .imagery.default .primary {
+      fill: #b3b3b3;
+    }
+    .imagery.hover .glow {
+      fill: #e6e6e6;
+    }
+    .imagery.hover .primary {
+      fill: #e6e6e6;
+    }
+    .imagery.active .glow {
+      fill: #fff;
+    }
+    .imagery.active .primary {
+      fill: #fff;
+    }
+  </style>
+  <!-- Show -->
+  <g class="carto default" transform="translate(0, 0)">
+    <use class="primary" x="0" y="0"
+         xlink:href="#show-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="carto hover" transform="translate(256, 0)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#show-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="carto active" transform="translate(512, 0)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#show-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="imagery default" transform="translate(768, 0)">
+    <use class="primary" x="0" y="0"
+         xlink:href="#show-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="imagery hover" transform="translate(1024, 0)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#show-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="imagery active" transform="translate(1280, 0)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#show-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#show-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <!-- Hide -->
+  <g class="carto default" transform="translate(0, 256)">
+    <use class="primary" x="0" y="0"
+         xlink:href="#hide-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="carto hover" transform="translate(256, 256)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#hide-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="carto active" transform="translate(512, 256)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#hide-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="imagery default" transform="translate(768, 256)">
+    <use class="primary" x="0" y="0"
+         xlink:href="#hide-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="imagery hover" transform="translate(1024, 256)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#hide-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+
+  <g class="imagery active" transform="translate(1280, 256)">
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"/>
+    <use class="glow" filter="url(#glow)"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+    <use class="primary" x="0" y="0"
+         xlink:href="#hide-shape"/>
+    <use class="primary"
+         x="0" y="0" xlink:href="#hide-shape"
+         transform="translate(0, 100.333)"/>
+  </g>
+</svg>

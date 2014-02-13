@@ -1,0 +1,352 @@
+body {
+    font: 300 60px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: gray;
+    overflow: hidden;
+}
+
+.clear { clear: both; }
+
+.lhs { float: left;}
+.rhs { float: right;}
+
+#loading {
+    font-family: Roboto;
+    font-size: 22px;
+    font-weight: 600;
+    padding: 20px;
+}
+
+#loading em {
+    font-style: 18px;
+    font-weight: 100;
+    opacity: 0.6;
+}
+
+#search {
+    position: absolute;
+    right: 140px;
+    top: 1.5%;
+    opacity: 0.8;
+    display: none;
+    z-index: 0; /* Map is -2 */
+}
+
+#search-btn,
+#search input {
+    font-family: Roboto, Helvetica, sans-serif;
+    /*box-shadow: -2px 2px 5px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);*/
+    -webkit-border-radius: 2px 0 0 2px;
+    -moz-border-radius: 2px 0 0 2px;
+    border-radius: 2px 0 0 2px;
+    padding: 5px 10px;
+    color: #000;
+}
+
+.input-append {
+    margin-left: 420px;
+}
+
+.nav-pills > .active > a {
+    background-color: #282735 !important;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    margin-right: 10px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 3px;
+}
+
+#search input[type='text'],
+#search input[type='search'] {
+    padding-left: 8px;
+    padding-right: 8px;
+
+    -webkit-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -moz-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -ms-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -o-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+}
+
+#search-btn,
+#search input[type=submit] {
+}
+
+footer {
+    background-color: #fff;
+    border: 1px solid #dedede;
+    opacity: 0.8;
+    font-size: 8pt;
+    font-family: Menlo, Consolas, monospace;
+    z-index: 1;
+}
+
+footer.abs {
+    position: absolute;
+    bottom: 0px;
+}
+
+footer .footer-txt {
+    padding: 0px 6px;
+}
+
+#map-canvas {
+    z-index: -2;
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 60%;
+}
+
+#map-canvas h3 {
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    line-height: 32px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#map-canvas p.excerpt {
+    font-size: 12px;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    line-height: 16px;
+}
+
+#map-canvas .desc-wrapper {
+    padding-right: 5px;
+    line-height: 18px;
+}
+
+#map-canvas .desc-wrapper img {
+    float: left;
+    width: 260px;
+    height: 200px;
+    margin-right: 10px;
+    margin-top: 2px;
+    box-shadow: 1px 1px 2px #666;
+}
+
+#map-canvas div.misc p {
+    margin-bottom: 5px;
+}
+
+/** Explore **/
+#explore-wrapper {
+    z-index: 1;
+}
+
+#explore {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1;
+}
+
+#explore-btn {
+    cursor: pointer;
+    height: 30px;
+    width: 170px;
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+    font-family: Roboto, Arial, sans-serif;
+    z-index: 1;
+    background-color: white;
+    border-radius: 2px;
+    margin-right: 15px;
+    padding: 0;
+    border: none;
+    box-shadow: 0px 1px 4px rgba(0,0,0,0.3);
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+#explore-btn label {
+    margin-bottom: 0px;
+}
+
+#explore-btn.open {
+    bottom: 171px;
+    box-shadow: -1px -1px 2px 0px rgba(0,0,0,0.1),1px -1px 2px 0px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+#explore .expander-sprite {
+    background: transparent url("../images/expander-sprite.svg") 0 0 no-repeat;
+    background-size: 90px 30px;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 7px;
+    right: 7px;
+}
+
+#explore .open .expander-sprite {
+    background-position: -15px 0px;
+}
+
+#explore .closed .expander-sprite {
+    background-position: -15px -15px;
+}
+
+.explore-label {
+    background: #fff url(../images/explore_sprite.png) no-repeat 6px 2px;
+    text-align: right;
+    margin-right: 25px;
+}
+
+@media (max-device-width: 480px) {
+
+    #explore-btn {
+        height: 70px;
+        width: 170px;
+        bottom: 40px;
+    }
+
+    #explore-btn label {
+        font-size: 22px;
+    }
+
+    #explore .expander-sprite {
+        display: none;
+    }
+}
+
+#explore-panel {
+    height: 240px;
+    width: 100%;
+    position: absolute;
+    bottom: -215px;
+    opacity: 0;
+
+    background-color: white;
+    margin-top: 0px;
+    z-index: 1;
+
+    -webkit-transition: height 0.4s cubic-bezier(0.3,0.3,0.4,0.9),top 0.1s linear,margin-top 0.1s linear;
+    -moz-transition: height 0.4s cubic-bezier(0.3,0.3,0.4,0.9),top 0.1s linear,margin-top 0.1s linear;
+    -ms-transition: height 0.4s cubic-bezier(0.3,0.3,0.4,0.9),top 0.1s linear,margin-top 0.1s linear;
+    transition: height 0.4s cubic-bezier(0.3,0.3,0.4,0.9),top 0.1s linear,margin-top 0.1s linear;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.25);
+    border-top: 2px solid white;
+}
+
+#explore-panel.open {
+    z-index: 1;
+}
+
+#explore-panel.closed {
+    z-index: 5;
+}
+
+
+#explore-panel .explore-panel-container {
+    margin: 10px;
+    padding-bottom: 5px;
+    overflow: auto;
+}
+
+.explore-img {
+    float: left;
+    margin-right: 15px;
+}
+
+.explore-img img {
+    height: 200px;
+    min-width: 260px;
+    box-shadow: 1px 1px 2px #777;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.explore-img img:hover {
+    border: 1px solid #bbb;
+    box-shadow: 1px 1px 2px #000;
+}
+
+#large-img {
+    background-color: #222;
+}
+
+#large-img .large-img-wrapper {
+    margin: 0 auto;
+}
+
+#large-img .large-img-wrapper .caption {
+    font-family: Roboto, Helvetica, sans-serif;
+    position: relative;
+    top: -43px;
+    color: #fff;
+    background-color: #222;
+    padding: 10px;
+    opacity: 0.8;
+    width: 99%;
+}
+
+.close-btn {
+    background: transparent url("../images/close_48.png") no-repeat 2px 2px;
+    cursor: pointer;
+    height: 52px;
+    width: 52px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    display: block;
+}
+
+.close-btn:hover {
+    border-radius: 50px;
+    background-color: #555;
+    opacity: 0.7;
+    -webkit-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -moz-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -ms-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    -o-transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+    transition: all 200ms cubic-bezier(0.52,0,0.48,1);
+}
+
+.xola-custom {
+    -moz-box-shadow:inset 0px 1px 0px 0px #caefab;
+    -webkit-box-shadow:inset 0px 1px 0px 0px #caefab;
+    box-shadow:inset 0px 1px 0px 0px #caefab;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #77d42a), color-stop(1, #5cb811) );
+    background:-moz-linear-gradient( center top, #77d42a 5%, #5cb811 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#77d42a', endColorstr='#5cb811');
+    background-color:#77d42a;
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    border:1px solid #268a16;
+    display:inline-block;
+    color:#ffffff;
+    cursor:pointer;
+    font-family:arial;
+    font-size:16px;
+    font-weight:bold;
+    margin-right:4px;
+    padding:6px 20px;
+    text-decoration:none;
+}
+.xola-custom:hover {
+    color: #fff;
+    text-decoration: none;
+    background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #5cb811), color-stop(1, #77d42a) );
+    background:-moz-linear-gradient( center top, #5cb811 5%, #77d42a 100% );
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#5cb811', endColorstr='#77d42a');
+    background-color:#5cb811;
+}
+.xola-custom:active {
+    position:relative;
+    top:1px;
+}
+
+/** FIX for Bootstrap and Google Maps Info window styes problem **/
+img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
+    max-width: none;
+}
+

@@ -1,0 +1,15 @@
+{
+  "browser": true,
+  "undef": true,
+  "unused": true,
+  "curly": true,
+  "globals": {"Backbone": false, "google" : false, "ga": false, "_": false, "OverlappingMarkerSpiderfier" : false, "xola" : false},
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "undef": true,
+  "unused": true,
+  "devel": true,
+  "jquery": true
+}

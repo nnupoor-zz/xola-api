@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Xola &amp; Google Maps Mashup</title>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Roboto:300,400,600,700" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.0/css/font-awesome.min.css" rel="stylesheet" />
+
+    <script type='text/javascript'>
+        var rootDomain = 'https://dev.xola.com';
+        var rootImageDomain = 'http://dev.xola.com';
+        var apiKey = 'pp1yvpos00okckkkko'; // Insert your apiKey
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script src="js/lib/jquery.min.js"></script>
+    <script src="js/lib/underscore-min.js"></script>
+    <script src="js/lib/backbone-min.js"></script>
+    <script src="js/lib/backbone.localStorage.js"></script>
+    <script src="js/lib/oms.min.js"></script>
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-41455869-2', 'vishavadia.com');
+    ga('send', 'pageview');
+    </script>
+</head>
+<body>
+    <script type="text/template" id="mainTpl">
+        <div id="container">
+            <div id="loading">
+                <p>Xola &amp; Google Maps Mashup</p>
+                <p><em>Fetching experiences... please wait</em></p>
+            </div>
+            <div id="map-canvas"></div>
+            <div id="explore-wrapper">
+                <div id="large-img"></div>
+                <!-- Will contain the bottom panel to browse photos -->
+                <section id="explore"></section>
+            </div>
+            
+            <div id="search">
+                <div class="search-wrapper input-append">
+                    <input class="span3" id="search-txt" type="search" placeholder="Where are you going?" value="Lake Tahoe" name="search" />
+                    <!-- <input class="btn icon-search" type="submit" id="search-btn" value="" /> -->
+                    <a class="btn" id="search-btn" href="#">
+                        <i class="icon-search"></i>
+                    </a>
+                </div>
+                <div id="searchtime">
+                <ul class="nav nav-pills">
+                  <li class="active" id="weekends"><a href="#">Going on Weekends</a></li>
+                  <li class="active" id="later"><a href="#">Or, Maybe Later?</a></li>
+                </ul>
+            </div> 
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="markerInfo">
+        <div class="marker-wrapper">
+            <h3><%= name %></h3>
+            <p class='excerpt'><%= excerpt %></p>
+            <div class='desc-wrapper'>
+                <img src='<%= cacheImg %>' height='200' width='260' class='desc-img' />
+                <p class='desc'><%= desc %></p>
+            </div>
+            <div class='misc'>
+                <div class='lhs'>
+                    <p>Price: $<%= price %></p>
+                    <p>Category: <%= category %></p>
+                </div>
+                <div class='rhs'>
+                    <div name="xola-checkout" class="xola-custom" id="<%= id %>">Book Now</div>
+                </div>
+                <div class='clear'></div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="largeImgMarkup">
+        <div class='large-img-wrapper'>
+            <img src='<%= img_original %>' />
+            <% if (caption != "") { %>
+            <div class='caption'>
+                <%= caption %>
+            </div>
+            <% } %>
+        </div>
+        <div class='close-btn'></div>
+    </script>
+
+    <script type='text/template' id='exploreContentTpl'>
+        <button class="explore-btn closed" id="explore-btn">
+            <label class="explore-label">See More</label>
+            <div class='expander-sprite'></div>
+        </button>
+        <div class="explore-panel closed" id="explore-panel">
+            <div class="explore-panel-container">
+                <div class='img-container'></div>
+                <div class='clear'></div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="footerTpl">
+        <footer class='abs'>
+            <div class='footer-txt'>
+                Developed by <a target="_blank" href='http://rushi.vishavadia.com'>Rushi Vishavadia</a>. Fork it on <a target="_blank" href='https://bitbucket.org/rushi/xola-googlemaps'>Bitbucket</a>.
+                <div style='display:inline;' class='last_updated'></div>
+            </div>
+        </footer>
+    </script>
+
+    <script type='text/template' id='imagePreviewTpl'>
+        <div class='explore-img'>
+            <img id='img_<%= img_id %>' title='<%= caption %>' data-experience-id="<%= exp_id %>" data-original-url="<%= original_url %>" src='<%= panel_img %>' />
+        </div>
+    </script>
+
+    <script src="js/app/models/experience.js"></script>
+    <script src="js/app/collections/experiences.js"></script>
+    <script src="js/app/views/experienceImage.js"></script>
+    <script src="js/app/views/imagePreview.js"></script>
+    <script src="js/app/views/explore.js"></script>
+    <script src="js/app/views/marker.js"></script>
+    <script src="js/app/views/map.js"></script>
+    <script src="js/app/views/app.js"></script>
+    <script src="js/app/app.js"></script>
+
+    <script src="js/lib/jqueryui/jquery-ui-1.10.3.custom.min.js"></script>
+
+    <script type="text/javascript">
+    (function() {
+    var co = document.createElement('script');
+    co.type = 'text/javascript';
+    co.async = true;
+    co.src = rootDomain + '/checkout.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(co, s);
+    })();
+    </script>
+</body>
+</html>
