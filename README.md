@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Xola - Google Maps Mashup
 
 ## Intro
@@ -23,3 +24,7 @@ A Screenshot
 This project is done using BackboneJS, Xola API and the Google Maps API.
 
 Map Icons Collection by Nicolas Mollet [http://mapicons.nicolasmollet.com/](http://mapicons.nicolasmollet.com) ![Logo](http://mapicons.nicolasmollet.com/wp-content/uploads/2011/03/miclogo-88x31.gif)
+=======
+xola-api
+========
+>>>>>>> c30a33f57090ed03c22d37ba6a6d115466768d39
