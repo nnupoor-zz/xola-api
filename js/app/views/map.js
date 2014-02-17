@@ -47,26 +47,26 @@ var app = app || {};
             // long, lat
             var defaultCoords = [37.413114,-122.070336];
             this.coords = { geo: defaultCoords.join(',') };
-            if (navigator.geolocation) {
-                // We have the user's Geo Location - let's center the map around that area
-                navigator.geolocation.getCurrentPosition(
-                    function(pos) {
-                        self.coords = { geo: pos.coords.latitude + "," + pos.coords.longitude };
+            // if (navigator.geolocation) {
+            //     // We have the user's Geo Location - let's center the map around that area
+            //     navigator.geolocation.getCurrentPosition(
+            //         function(pos) {
+            //             self.coords = { geo: pos.coords.latitude + "," + pos.coords.longitude };
                         
-                        var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + self.coords.geo + "&sensor=false";
-                        $.getJSON(url, function(data) {
-                            if(data.status==='OK'){
+            //             var url = "http://maps.googleapis.com/maps/api/geocode/json?address=" + self.coords.geo + "&sensor=false";
+            //             $.getJSON(url, function(data) {
+            //                 if(data.status==='OK'){
                                 
-                                self.currentAddress = data.results[0].formatted_address; console.log(self.currentAddress);
-                                $('#search-txt').val(self.currentAddress);
-                            }
-                        });
-                    },
-                    function(e) {
-                        console.warn(e);
-                    }
-                );
-            }
+            //                     self.currentAddress = data.results[0].formatted_address; console.log(self.currentAddress);
+            //                     $('#search-txt').val(self.currentAddress);
+            //                 }
+            //             });
+            //         },
+            //         function(e) {
+            //             console.warn(e);
+            //         }
+            //     );
+            // }
 
             var geo = this.coords.geo.split(',');
             this.options = {
